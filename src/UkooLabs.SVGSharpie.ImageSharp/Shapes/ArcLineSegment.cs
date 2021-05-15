@@ -21,9 +21,10 @@ namespace UkooLabs.SVGSharpie.ImageSharp.Shapes
         { }
         public PointF EndPoint => this.innerSegments.Last().EndPoint;
 
-        public IReadOnlyList<PointF> Flatten()
+        public ReadOnlyMemory<PointF> Flatten()
         {
-            return this.innerSegments.SelectMany(x => x.Flatten()).ToList();
+            return (from value in innerSegments
+                select value.Flatten()).SelectMany(x => x.ToArray()).ToArray();
         }
 
         public ILineSegment Transform(Matrix3x2 matrix)

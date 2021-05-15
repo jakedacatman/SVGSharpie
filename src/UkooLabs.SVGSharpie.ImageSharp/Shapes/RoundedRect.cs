@@ -53,21 +53,21 @@ namespace UkooLabs.SVGSharpie.ImageSharp.Shapes
 
         public RectangleF Bounds => this.innerPath.Bounds;
 
-        public int MaxIntersections => this.innerPath.MaxIntersections;
+        //public int MaxIntersections => this.innerPath.MaxIntersections;
 
-        public float Length => this.innerPath.Length;
+        //public float Length => this.innerPath.Length;
 
         public IPath AsClosedPath()
         {
             return this.innerPath.AsClosedPath();
         }
 
-        public bool Contains(PointF point)
+        /*public bool Contains(PointF point)
         {
             return this.innerPath.Contains(point);
         }
 
-        public PointInfo Distance(PointF point)
+        /*public PointInfo Distance(PointF point)
         {
             return this.innerPath.Distance(point);
         }
@@ -81,23 +81,24 @@ namespace UkooLabs.SVGSharpie.ImageSharp.Shapes
         {
             return this.innerPath.FindIntersections(start, end, buffer);
         }
+        */
 
         public IEnumerable<ISimplePath> Flatten()
         {
             return this.innerPath.Flatten();
         }
 
-        public SegmentInfo PointAlongPath(float distanceAlongPath)
+        /*public SegmentInfo PointAlongPath(float distanceAlongPath)
         {
             return this.innerPath.PointAlongPath(distanceAlongPath);
-        }
+        }*/
 
         public IPath Transform(Matrix3x2 matrix)
         {
             return this.innerPath.Transform(matrix);
         }
 
-        public int FindIntersections(PointF start, PointF end, PointF[] buffer, int offset, IntersectionRule intersectionRule)
+        /*public int FindIntersections(PointF start, PointF end, PointF[] buffer, int offset, IntersectionRule intersectionRule)
         {
             return this.innerPath.FindIntersections(start, end, buffer, offset, intersectionRule);
         }
@@ -105,6 +106,6 @@ namespace UkooLabs.SVGSharpie.ImageSharp.Shapes
         public int FindIntersections(PointF start, PointF end, Span<PointF> buffer, IntersectionRule intersectionRule)
         {
             return this.innerPath.FindIntersections(start, end, buffer, intersectionRule);
-        }
+        }*/
     }
 }

@@ -45,7 +45,10 @@ namespace UkooLabs.SVGSharpie.ImageSharp.Dom
             }
 
             var shapeOptions = new ShapeOptions { IntersectionRule = IntersectionRule.Nonzero };
-            var shapeGraphicsOptions = new ShapeGraphicsOptions(new GraphicsOptions(), shapeOptions);
+            var shapeGraphicsOptions = new DrawingOptions()
+            {
+                ShapeOptions = shapeOptions
+            };
 
             if (brush != null)
             {
