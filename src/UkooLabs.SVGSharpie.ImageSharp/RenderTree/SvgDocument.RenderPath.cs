@@ -200,7 +200,7 @@ namespace UkooLabs.SVGSharpie.ImageSharp.Dom
             /// </summary>
             public void ArcTo(PointF point, SizeF radius, float angle, bool largeArcFlag, bool sweepFlag)
             {
-                this.builder.AddSegment(new ArcLineSegemnt(this.currentPoint, point, radius, angle, largeArcFlag, sweepFlag));
+                this.builder.AddSegment(new ArcLineSegment(this.currentPoint, point, radius, angle, largeArcFlag, sweepFlag));
                 this.currentPoint = point;
                 lastCubicControlPoint = point;
                 lastQuadriticControlPoint = point;

@@ -8,16 +8,16 @@ using System.Text;
 
 namespace UkooLabs.SVGSharpie.ImageSharp.Shapes
 {
-    public class ArcLineSegemnt : ILineSegment
+    public class ArcLineSegment : ILineSegment
     {
         private ILineSegment[] innerSegments;
 
-        public ArcLineSegemnt(PointF from, PointF to, SizeF radius, float angle, bool largeArcFlag, bool sweepFlag)
+        public ArcLineSegment(PointF from, PointF to, SizeF radius, float angle, bool largeArcFlag, bool sweepFlag)
         {
             innerSegments = EllipticArcToBezierCurve(from, to, radius, angle, largeArcFlag, sweepFlag).ToArray();
         }
 
-        private ArcLineSegemnt()
+        private ArcLineSegment()
         { }
         public PointF EndPoint => this.innerSegments.Last().EndPoint;
 
@@ -29,7 +29,7 @@ namespace UkooLabs.SVGSharpie.ImageSharp.Shapes
 
         public ILineSegment Transform(Matrix3x2 matrix)
         {
-            return new ArcLineSegemnt()
+            return new ArcLineSegment()
             {
                 innerSegments = this.innerSegments.Select(x => x.Transform(matrix)).ToArray()
             };
