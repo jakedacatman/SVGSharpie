@@ -23,7 +23,7 @@ namespace UkooLabs.SVGSharpie.ImageSharp.Dom
             base.VisitTextElement(element);
 
             var fonts = SystemFonts.Collection;
-            FontFamily family = null;
+            fonts.TryGet(DefaultFont, out FontFamily family);
 
             foreach (var f in element.Style.FontFamily.Value)
             {
@@ -37,7 +37,7 @@ namespace UkooLabs.SVGSharpie.ImageSharp.Dom
                     fontName = DefaultSerifFont;
                 }
 
-                if (fonts.TryFind(fontName, out family))
+                if (fonts.TryGet(fontName, out family))
                 {
                     break;
                 }
@@ -45,22 +45,24 @@ namespace UkooLabs.SVGSharpie.ImageSharp.Dom
 
             if (family == null)
             {
-                family = fonts.Find(DefaultFont);
+                fonts.TryGet(DefaultFont, out family);
             }
 
             var fontSize = element.Style.FontSize.Value.Value;
             var origin = new PointF(element.X?.Value ?? 0, element.Y?.Value ?? 0);
-            var font = family.CreateFont(fontSize);
+            var font = new Font(family, fontSize);
 
             var visitor = new SvgTextSpanTextVisitor();
             element.Accept(visitor);
             var text = visitor.Text;
 
             // offset by the ascender to account for fonts render origin of top left
-            var ascender = ((font.Ascender * font.Size) / (font.EmSize * 72)) * 72;
+            var ascender = ((font.FontMetrics.Ascender * font.Size) / (font.FontMetrics.UnitsPerEm * 72)) * 72;
 
-            var render = new RendererOptions(font, 72, origin - new PointF(0, ascender))
+            var render = new TextOptions(font)
             {
+                Dpi = 72, 
+                Origin = origin - new PointF(0, ascender),
                 HorizontalAlignment = element.Style.TextAnchor.Value.AsHorizontalAlignment()
             };
 
